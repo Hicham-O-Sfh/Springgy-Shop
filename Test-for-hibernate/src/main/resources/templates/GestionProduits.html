@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+
+    <!-- Bootstrap CSS -->
+    <link crossorigin="anonymous"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          rel="stylesheet">
+
+    <div th:replace="Fragments/MyTemplate:: MyStyleSheets"></div>
+    <link rel="stylesheet" href="css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="css/InputImageStyle.css"/>
+
+    <title>Gestion</title>
+    <style>
+        #Moncontainer {
+            height: 700px;
+            padding: 30px;
+        }
+
+        .form-control {
+            color: darkseagreen;
+        }
+
+    </style>
+</head>
+<body>
+<div th:replace="Fragments/MyTemplate:: MyHeader">
+</div>
+<div class="container" id="Moncontainer">
+    <button class="btn btn-success nBtn">Ajouter Nouveau Produit</button>
+    <a class="btn btn-success" th:href="@{/remplire}">Fill</a>
+    <div class="card" style="margin-top:20px; ">
+        <div class="card-block">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nom</th>
+                    <th>Catégorie</th>
+                    <th>Prix</th>
+                    <th>CodeBarre</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="produit : ${data}">
+                    <td th:text="${produit.idProduit}"></td>
+                    <td th:text="${produit.libelleProduit}"></td>
+                    <td th:text="${produit.categorieProduit.libelleCategorie}"></td>
+                    <td th:text="${produit.prix}"></td>
+                    <td th:text="${produit.codeBarre}"></td>
+                    <td>
+                        <a class="btn btn-danger delBtn" th:href="@{delete/(id=${produit.idProduit})}">Supprimer</a>
+                        <a class="btn btn-primary eBtn" th:href="@{findOne/(id=${produit.idProduit})}">Modifier</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <hr/>
+            <ul class="nav nav-pills">
+                <li class="nav-item"
+                    th:each="i : ${#numbers.sequence(0,data.getTotalPages()-1)}">
+                    <!--                <li class="nav-item"-->
+                    <!--                    th:each="i : ${#numbers.sequence(0,1)}">-->
+                    <a
+                            class="nav-link" th:classappend="${currentPage}==${i}?'active':''"
+                            th:href="@{Panel(page=${i})}"
+                            th:text="${i}"></a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="myForm">
+        <form method="post" th:action="@{/save}" autocomplete="off">
+            <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade"
+                 id="exampleModal" role="dialog"
+                 tabindex="-1">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header" style="padding: 10px;">
+                            <h5 class="modal-title" id="exampleModalLabel"> Modifier ou
+                                Créer</h5>
+                            <button aria-label="Close" class="close" data-dismiss="modal"
+                                    type="button">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body" style="padding-top: 0rem;">
+
+                            <div th:replace="Fragments/MyTemplate :: InputImageDesign"></div>
+
+                            <div class="form-group">
+                                <label class="col-form-label" for="idProduit" hidden>ID:</label>
+                                <input class="form-control" id="idProduit" name="idProduit" type="text" value=""
+                                       hidden/>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label class="col-form-label" for="libelleProduit">Nom du produit :</label>
+                                    <input class="form-control" id="libelleProduit" name="libelleProduit" type="text"
+                                           value="" />
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                    <label class="col-form-label" for="categorieProduit">Categorie :</label>
+                                    <select onchange="ChangeColor(this);" class="form-control" id="categorieProduit"
+                                            name="categorieProduit" >
+                                        <option value="" selected hidden>Choisir ...</option>
+                                        <option th:each="cc : ${listCategorie}" th:value="${cc.idCategorie}">
+                                            <label th:text="${cc.libelleCategorie}"></label>
+                                        </option>
+
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label class="col-form-label" for="prix">Prix:</label>
+
+                                    <div class="input-group mb-2">
+                                        <input class="form-control" id="prix" name="prix"
+                                               type="text"
+                                               value=""/>
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">MAD</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                    <label class="col-form-label" for="codeBarre">Code Barre:</label>
+
+                                    <div class="input-group mb-2">
+                                        <input class="form-control" id="codeBarre" name="codeBarre" type="text"
+                                               value="" />
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <i class="fa fa-barcode" style="font-size: 20px;"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-form-label" for="descriptionProduit">Description :</label>
+                                <textarea style="height: 150px;" class="form-control" id="descriptionProduit"
+                                          name="descriptionProduit" type="text" value="" ></textarea>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" data-dismiss="modal"
+                                    type="button">Annuler
+                            </button>
+                            <input class="btn btn-primary" type="submit" value="Enregistrer"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade" id="myModal"
+         role="dialog" tabindex="-1">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="myModalLabel">Suppression...</h5>
+                    <button aria-label="Close" class="close" data-dismiss="modal"
+                            type="button">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p class="alert alert-danger">
+                        Etes-vous sur de vouloir supprimer ce produit ??
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-dismiss="modal"
+                            type="button">Close
+                    </button>
+                    <a class="btn btn-danger" href="" id="delRef">Supprimer</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="Fragments/MyTemplate :: MyFooter"></div>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        type="text/javascript"></script>
+<script>
+    if ($('#categorieProduit :selected').text() === 'Choisir ...') {
+        $('#categorieProduit').css('color', 'lightslategray');
+    }
+
+    function ChangeColor(option) {
+        if (option.value !== 'Choisir ...')
+            var select = document.getElementById('categorieProduit');
+        select.style.color = 'darkseagreen';
+    };
+
+    $(document).ready(function () {
+
+        $('.nBtn, .table .eBtn').on('click', function (event) {
+            event.preventDefault();
+            var href = $(this).attr('href');
+            var text = $(this).text(); //return New or Edit
+
+            if (text === 'Modifier') {
+                $.get(href, function (produit, status) {
+
+                    $('.myForm #idProduit').val(produit.idProduit);
+                    $('.myForm #libelleProduit').val(produit.libelleProduit);
+                    $('.myForm #categorieProduit').val(produit.idCategorie).change();
+                    $('.myForm #prix').val(produit.prix);
+                    $('.myForm #codeBarre').val(produit.codeBarre);
+                });
+                $('.myForm #exampleModal').modal();
+            } else {
+                $('.myForm #idProduit').val('');
+                $('.myForm #libelleProduit').val('');
+                $('.myForm #categorieProduit').val('');
+                $('.myForm #prix').val('');
+                $('.myForm #codeBarre').val('');
+                $('.myForm #exampleModal').modal();
+            }
+        });
+
+        $('.table .delBtn').on('click', function (event) {
+            event.preventDefault();
+            var href = $(this).attr('href');
+            $('#myModal #delRef').attr('href', href);
+            $('#myModal').modal();
+        });
+    });
+</script>
+
+<script crossorigin="anonymous"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" type="text/javascript"></script>
+<script crossorigin="anonymous"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" type="text/javascript"></script>
+<script th:replace="Fragments/MyTemplate:: JavascriptAndJquery"></script>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/jpg" href="LoginRegisterStyles/images/logo.jpg"/>
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="LoginRegisterStyles/vendor/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="LoginRegisterStyles/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css"
+          href="LoginRegisterStyles/fonts/iconic/css/material-design-iconic-font.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="LoginRegisterStyles/vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="LoginRegisterStyles/vendor/css-hamburgers/hamburgers.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="LoginRegisterStyles/vendor/animsition/css/animsition.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="LoginRegisterStyles/vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="LoginRegisterStyles/vendor/daterangepicker/daterangepicker.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="LoginRegisterStyles/css/util.css">
+    <link rel="stylesheet" type="text/css" href="LoginRegisterStyles/css/main.css">
+    <link rel="stylesheet" type="text/css" href="LoginRegisterStyles/css/styleButton.css">
+    <link rel="stylesheet" type="text/css" href="LoginRegisterStyles/css/styleImage.css">
+    <!--===============================================================================================-->
+    <style>
+        body {
+            background-image: url('https://media.giphy.com/media/3MflvkDGeIQmUH88ff/giphy.gif');
+            background-size: cover;
+            height: 100%;
+            background-repeat: repeat-y;
+            background-attachment: fixed;
+        }
+        img {
+            border-radius: 50%;
+        }
+        .navbar {
+            padding-top: 0rem;
+            padding-bottom: 0rem;
+        }
+    </style>
+</head>
+<body>
+<!-- Image and text -->
+<nav class="navbar navbar-light" style="background: #FFFFFF;">
+    <div class="morph zoom colonne">
+        <div><a class="navbar-brand" href="#"><img src="LoginRegisterStyles/images/logo.png"/></a></div>
+    </div>
+</nav>
+<div class="container-login100">
+    <div class="wrap-login100 p-l-55 p-r-55 p-t-80 p-b-30">
+        <form th:action="@{/login}" method="POST" class="login100-form">
+
+            <!--        afterRegister-->
+            <div align="center" th:if="${param.afterRegister}">
+                <span style="font-size: 15px;" class="badge badge-pill badge-success">Félicitation Vous avez été inscrit avec succées !</span>
+            </div>
+
+            <span class="login100-form-title p-b-37">
+                Connectez-vous !
+             </span>
+
+            <!--            Email-->
+            <div class="wrap-input100   m-b-25">
+                <input type="text" id="email"
+                       th:placeholder="Email"
+                       name="email"
+                       class="input100"/>
+                <span class="focus-input100"></span>
+            </div>
+
+            <!--            Mot de passe-->
+            <div class="wrap-input100   m-b-25">
+                <input type="password" id="password"
+                       name="password"
+                       th:placeholder="Password" class="input100"/>
+                <span class="focus-input100"></span>
+            </div>
+
+            <div align="center" th:if="${param.error}">
+                <span style="font-size: 15px;" class="badge badge-pill badge-danger">Email/Mot de passe invalide.</span>
+                <br/>
+                <br/>
+                <br/>
+            </div>
+
+            <!--            Button Submit-->
+            <div class="container-login100-form-btn">
+                <button class="button"
+                        name="Submit"
+                        value="Login"
+                        type="Submit"
+                        th:text="Login"
+                        style="margin-right:10px;">
+                </button>
+            </div>
+            <br/>
+            <a href="/recover-password">Mot de passe oublié ??</a>
+        </form>
+    </div>
+</div>
+
+
+<div id="dropDownSelect1"></div>
+
+<!--===============================================================================================-->
+<script src="LoginRegisterStyles/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+<script src="LoginRegisterStyles/vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+<script src="LoginRegisterStyles/vendor/bootstrap/js/popper.js"></script>
+<script src="LoginRegisterStyles/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+<script src="LoginRegisterStyles/vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+<script src="LoginRegisterStyles/vendor/daterangepicker/moment.min.js"></script>
+<script src="LoginRegisterStyles/vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+<script src="LoginRegisterStyles/vendor/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+<!--<script src="js/main.js"></script>-->
+
+</body>
+
+</html>

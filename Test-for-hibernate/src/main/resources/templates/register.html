@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Register</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="LoginRegisterStyles/images/logo.png"/>
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="LoginRegisterStyles/vendor/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="LoginRegisterStyles/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css"
+          href="LoginRegisterStyles/fonts/iconic/css/material-design-iconic-font.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="LoginRegisterStyles/vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="LoginRegisterStyles/vendor/css-hamburgers/hamburgers.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="LoginRegisterStyles/vendor/animsition/css/animsition.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="LoginRegisterStyles/vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="LoginRegisterStyles/vendor/daterangepicker/daterangepicker.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="LoginRegisterStyles/css/util.css">
+    <link rel="stylesheet" type="text/css" href="LoginRegisterStyles/css/main.css">
+    <link rel="stylesheet" type="text/css" href="LoginRegisterStyles/css/styleButton.css">
+    <!--===============================================================================================-->
+    <style>
+        body {
+            background-image: url('https://media.giphy.com/media/3MflvkDGeIQmUH88ff/giphy.gif');
+            background-size: cover;
+            height: 100%;
+            /*background-size: 100%;*/
+            background-repeat: repeat-y;
+            background-attachment: fixed;
+        }
+
+        select {
+            border-width: 0px;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container-login100">
+    <div class="wrap-login100 p-l-55 p-r-55 p-t-80 p-b-30">
+        <form autocomplete="off" action="#" th:action="@{/register}" th:object="${user}" method="post"
+              class="login100-form" role="form">
+
+				<span class="login100-form-title p-b-37">
+					S'inscrire !
+				</span>
+
+            <!--            information general-->
+            <div class="wrap-input100   m-b-25">
+                <input type="text" th:field="*{nomClient}" placeholder="Nom de famille" class="input100"/>
+                <span class="focus-input100"></span>
+
+                <input type="text" th:field="*{prenomClient}" placeholder="Prénom" class="input100"/>
+                <span class="focus-input100"></span>
+
+                <input type="text" th:field="*{prenomClientFacultatif}" placeholder="Deuxiéme prénom (Facultatif)"
+                       class="input100"/>
+                <span class="focus-input100"></span>
+            </div>
+
+            <!--            contact & credentials -->
+            <div class="wrap-input100   m-b-25">
+                <input type="text" th:field="*{telephone}" placeholder="Numéro de télephone" class="input100"/>
+                <span class="focus-input100"></span>
+
+                <input type="email" th:field="*{email}" placeholder="Email (Username)" class="input100"/>
+                <span class="focus-input100"></span>
+
+                <input type="password" th:field="*{motDePasseAccount}" placeholder="Password" class="input100"/>
+                <span class="focus-input100"></span>
+            </div>
+
+            <!--            adresse-->
+            <div class="wrap-input100   m-b-25">
+                <input type="text" th:field="*{adresse}" placeholder="Adresse compléte" class="input100"/>
+                <span class="focus-input100"></span>
+            </div>
+
+            <!--            sexeBean-->
+            <div class="wrap-input100   m-b-25">
+                <select class="input100" placeholder="Sexe" th:field="*{sexeBean}">
+                    <option th:each="h : ${sexeList}" th:value="${h.idSexe}">
+                        <label th:text="${h.libelleSexe}"></label>
+                    </option>
+                </select>
+                <span class="focus-input100"></span>
+            </div>
+
+            <!--            pays-->
+            <div class="wrap-input100  m-b-20">
+                <select class="input100" placeholder="Pays" th:field="*{pay}">
+                    <option th:each="p : ${paysList}" th:value="${p.idPays}">
+                        <label th:text="${p.libellePays}"></label>
+                    </option>
+                </select>
+                <span class="focus-input100"></span>
+            </div>
+
+            <!--            accepteNouveauteParMail-->
+            <div class="wrap-input100   m-b-25">
+                <input type="checkbox" th:field="*{accepteNouveauteParMail}" class=""/>
+                Recevoir les actualités par email
+                (vous pouvez vous désabonnez à n'impoorte quel moment)
+            </div>
+
+
+            <span style="font-size: 25px; color:red;" th:utext="${successMessage}"></span>
+            <div class="alert alert-warning alert-dismissible col-sm-12"
+                 th:if="${(bindingResult != null && bindingResult.getAllErrors() != null)}">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×
+                </button>
+
+                <ul th:each="data : ${bindingResult.getAllErrors()}">
+                    <li th:text="${data.getObjectName() + ' : ' + data.getDefaultMessage()}"></li>
+                </ul>
+            </div>
+
+            <Br/>
+            <Br/>
+            <Br/>
+            <!--            Button Submit-->
+            <div class="container-login100-form-btn">
+                <button type="submit" class="button">
+                    S'inscrire !
+                </button>
+            </div>
+            <Br/>
+            <div class="text-center">
+                <a href="/login?afterRegister=true" class="txt2 hov1">
+                    Se connecter
+                </a>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+
+<div id="dropDownSelect1"></div>
+
+<!--===============================================================================================-->
+<script src="LoginRegisterStyles/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+<script src="LoginRegisterStyles/vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+<script src="vLoginRegisterStyles/endor/bootstrap/js/popper.js"></script>
+<script src="LoginRegisterStyles/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+<script src="LoginRegisterStyles/vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+<script src="LoginRegisterStyles/vendor/daterangepicker/moment.min.js"></script>
+<script src="LoginRegisterStyles/vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+<script src="LoginRegisterStyles/vendor/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+<script src="LoginRegisterStyles/js/main.js"></script>
+
+</body>
+</html>
+
+
