@@ -1,4 +1,4 @@
-# <img src="https://www.developpez.com/public/images/news/spting-boot.png" width="120" height="50"> Spring Framework [![Build Status](https://build.spring.io/plugins/servlet/wittified/build-status/SPR-PUBM)](https://build.spring.io/browse/SPR)
+# <img src="https://www.developpez.com/public/images/news/spting-boot.png" width="120" height="50">
 
 ## A propos de Spring Boot
 Spring Boot est un framework basé sur Java open source utilisé pour créer un micro-service. Il est développé par Pivotal Team et est utilisé pour créer des applications de printemps autonomes et prêtes pour la production. Ce chapitre vous donnera une introduction à Spring Boot et vous familiarisera avec ses concepts de base.
