@@ -34,36 +34,36 @@ public class ProduitsController {
     @Autowired
     CategorieService categorieService;
 
-//    @GetMapping("/Panel")
-//    public String showPage(Model model, @RequestParam(defaultValue = "0") int page) {
-//        //**
-//        Pageable sortedById = PageRequest.of(page, 4, Sort.by("idProduit").ascending());
-//        //**
-//        model.addAttribute("data",
-////                countryRepository.findAll(PageRequest.of(page, 4))
-//                produitService.findAll(sortedById)
-//        );
-//        model.addAttribute("currentPage", page);
-//        return "index";
-//    }
-//
-//    @PostMapping("/save")
-//    public String save(Produit country) {
-//        produitRepository.save(country);
-//        return "redirect:/";
-//    }
-//
-//    @GetMapping("/delete")
-//    public String deleteCountry(Integer id) {
-//        produitRepository.deleteById(id);
-//        return "redirect:/";
-//    }
-//
-//    @GetMapping("/findOne")
-//    @ResponseBody
-//    public Produit findOne(Integer id) {
-//        return produitRepository.findById(id).get();
-//    }
+   @GetMapping("/Panel")
+   public String showPage(Model model, @RequestParam(defaultValue = "0") int page) {
+       //**
+       Pageable sortedById = PageRequest.of(page, 4, Sort.by("idProduit").ascending());
+       //**
+       model.addAttribute("data",
+               countryRepository.findAll(PageRequest.of(page, 4))
+               produitService.findAll(sortedById)
+       );
+       model.addAttribute("currentPage", page);
+       return "index";
+   }
+
+   @PostMapping("/save")
+   public String save(Produit country) {
+       produitRepository.save(country);
+       return "redirect:/";
+   }
+
+   @GetMapping("/delete")
+   public String deleteCountry(Integer id) {
+       produitRepository.deleteById(id);
+       return "redirect:/";
+   }
+
+   @GetMapping("/findOne")
+   @ResponseBody
+   public Produit findOne(Integer id) {
+       return produitRepository.findById(id).get();
+   }
 
     @RequestMapping(value = "/Panel", method = RequestMethod.GET)
     public ModelAndView showPage(@RequestParam(defaultValue = "0") int page) {
