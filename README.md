@@ -1,22 +1,22 @@
 # <img src="https://www.developpez.com/public/images/news/spting-boot.png" width="120" height="50">
 
 ## A propos de Spring Boot
-Spring Boot est un framework basé sur Java open source utilisé pour créer un micro-service. Il est développé par Pivotal Team et est utilisé pour créer des applications de printemps autonomes et prêtes pour la production. Ce chapitre vous donnera une introduction à Spring Boot et vous familiarisera avec ses concepts de base.
+Spring Boot est un Framework basé sur Java open source utilisé pour créer un micro-service. Il est développé par Pivotal Team et est utilisé pour créer des applications Spring autonomes et prêtes pour la production.
 
-# CooLLy (Le Brand-name)
-Projet de Commerce en ligne avec panel de Back-Office & statistiques réalisé par le junior developpeur **Hicham Oussama Saffih**
+# CooLLy Springgy-Shop (Le Brand-name)
+Projet de Commerce en ligne avec panel de Back-Office & statistiques réalisé par le développeur **Hicham Oussama Saffih**
 <br>
 ![Build passing](https://img.shields.io/badge/Contact%20me-Any%20time-yellowgreen)
 
-  La concepttion de schématisation Base de donnée a été réaliser en Merise et Uml ; pour cela quelque diagram sont déja dans leurs etats final tel que les diagrammes : Use-Case, séquences, class, MLD et MCD. Tous cela afin de garder une bonne organisation, non pas seulement du code mais aussi au niveau de la répartition des taches. Je dépose dans ce répository toutes modification du codes directment dans la branche principal `master` du repository.
+  La concepttion du schéma de la Base de donnée a été réaliser en se basant sur des concept Merise et UML; pour cela quelque diagrams sont déja dans leurs états final tel que les diagrammes : Use-Case, séquences, class, MLD et MCD. Ceci est dû afin de garder une bonne organisation, non pas seulement du code mais aussi au niveau de la répartition des tâches au niveau de l'équipe. Je dépose dans ce repository (dossier de répertoire) toute modification du codes directement au niveau de la branche principale `master` du dépots.
   
   Les technologie utilisés jusqu'à Maintenant sont :
   - Langage & Framework : **Spring Boot 5.0 -Java 11-**.
-  - Template static : **Divisma** .
-  - Template engine : **Thymeleaf, Html/Bootstrap/jquery**.
-  - Orm : **Hibernate v5**.
-  - Security & encryption : **Spring security 5.2**
-  - Base de donnée & requétage: **PostgreSql 9.5 en PLpgSql**.
+  - Template UI/UX : **Divisma** .
+  - Template engine : **Thymeleaf, Html/Bootstrap/JQuery**.
+  - Orm : **Hibernate V5**.
+  - Securité (Hash & cryptage) : **Spring security 5.2**
+  - Base de donnée & requétage: **PostgreSql 9.5 - PLpgSql**.
   
   
   ***_With_Love_and_Fun_*** 
